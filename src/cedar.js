@@ -4,7 +4,7 @@ import init, { isAuthorized, getCedarVersion } from '@cedar-policy/cedar-wasm/we
 
 let ready = null
 export function loadCedar() {
-  if (!ready) ready = init({ module_or_path: '/cedar_wasm_bg.wasm' }).then(() => getCedarVersion())
+  if (!ready) ready = init({ module_or_path: import.meta.env.BASE_URL + 'cedar_wasm_bg.wasm' }).then(() => getCedarVersion())
   return ready
 }
 
