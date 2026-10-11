@@ -57,7 +57,7 @@ export default function App() {
     setLastDecision(result)
     if (!result.allowed) return setModal({ stage: 'denied', result })
 
-    const ts = new Date().toISOString().slice(0, 16).replace('T', ' ')
+    const ts = new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Kolkata' }).slice(0, 16)
     setLedger(await appendEntry(ledger, { ts, from: seller.vpa, to: buyer.vpa, kwh, price }))
     setChain(null)
     setHomes((hs) => hs.map((h) => (h.id === seller.id ? { ...h, surplusKwh: +(h.surplusKwh - kwh).toFixed(2) } : h)))
@@ -177,7 +177,7 @@ export default function App() {
           <div className="presets">
             <small>Try a scenario:</small>
             <button onClick={() => preset('sharma', 'gupta', 4)}>✅ Neighbour trade</button>
-            <button onClick={() => preset('sharma', 'singh', 4)}>🚫 Other transformer</button>
+            <button onClick={() => preset('sharma', 'singh', 2)}>🚫 Other transformer</button>
             <button onClick={() => preset('verma', 'gupta', 2)}>🚫 Not net-metered</button>
             <button onClick={() => preset('khan', 'gupta', 12)}>🚫 Over cap & surplus</button>
             <button onClick={() => preset('iyer', 'singh', 3, 9)}>🚫 Price gouging</button>
